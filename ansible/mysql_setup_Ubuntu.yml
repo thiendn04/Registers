@@ -1,0 +1,101 @@
+---
+- name: MySQL Server Setup
+  hosts: dbsrvgrp
+  become: yes
+
+  tasks:
+  
+    - name: Update timezone
+      command: ln -f -s /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
+
+    - name: Update apt repo and cache on all Debian/Ubuntu boxes
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+    - name: Upgrade all packages on servers
+      apt: upgrade=dist force_apt_get=yes
+
+    - name: Check if a reboot is needed on all servers
+      register: reboot_required_file
+      stat: path=/var/run/reboot-required get_md5=no
+
+    - name: Reboot the box if kernel updated
+      reboot:
+        msg: "Reboot initiated by Ansible for kernel updates"
+        connect_timeout: 5
+        reboot_timeout: 300
+        pre_reboot_delay: 0
+        post_reboot_delay: 30
+        test_command: uptime
+      when: reboot_required_file.stat.exists    
+
+    - name: Installing Mysql  and dependencies
+      package:
+       name: "{{item}}"
+       state: present
+       update_cache: yes
+      loop:
+        - mysql-server
+        - mysql-client 
+        - python3-mysqldb
+        - libmysqlclient-dev
+
+    - name: Start & Enable MySQL Server to start on boot
+      service: 
+        name: mysql
+        state: started
+        enabled: yes
+
+    - name: update expired root user password
+      command: mysql --user root --password="" --execute="ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '{{ mysql_root_password }}';"
+
+    - name: Run mysql_secure_installation
+      command: mysql --user root --password={{ mysql_root_password }} --execute="{{ item }};"
+      with_items:
+        - DELETE FROM mysql.user WHERE User=''
+        - DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')
+        - DROP DATABASE IF EXISTS test
+        - DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'
+        - FLUSH PRIVILEGES
+      changed_when: False
+
+    - name: Add Permision access to mysql with host
+      command: mysql --user root --password={{ mysql_root_password }} --execute="{{ item }};"
+      with_items:
+        - CREATE USER 'administrator'@'192.168.254.131' IDENTIFIED BY 'Cntt@8888'
+        - GRANT ALL PRIVILEGES ON *.* TO 'administrator'@'192.168.254.131' WITH GRANT OPTION
+        - FLUSH PRIVILEGES
+
+    - name: Search and edit file mysqld.cnf
+      replace:
+        path: /etc/mysql/mysql.conf.d/mysqld.cnf
+        regexp: '127.0.0.1'
+        replace: '0.0.0.0'
+      notify:
+        - restart mysql
+
+    - name: Allow everything and enable UFW
+      ufw:
+        state: enabled
+        policy: allow
+
+
+    - name: Open ports in UFW
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp 
+      with_items:
+        - 22    # SSH
+        - 80    # HTTP
+        - 443   # HTTPS
+        - 3306  # MySQL
+
+    - name: Reload UFW
+      ufw:
+        state: reloaded 
+
+  handlers:
+    - name: restart mysql
+      service:
+        name: mysql
+        state: restarted

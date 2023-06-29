@@ -1,0 +1,76 @@
+---
+- name: MySQL Server Setup
+  hosts: dbsrvgrp
+  become: yes
+
+  tasks:
+  
+    - name: Update timezone
+      command: ln -f -s /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
+
+    - name: Update all packages
+      yum:
+        name: '*'
+        state: latest
+
+    - name: Install EPEL repo.
+      yum:
+        name: epel-release
+        state: present
+
+    - name: Install python-pip.
+      yum:
+        name: python-pip
+        state: present
+
+    - name: install pexpect
+      pip:
+        name: pexpect        
+
+    - name: Install MySQL Software Repo
+      yum:
+        name: http://repo.mysql.com/mysql80-community-release-el7-5.noarch.rpm
+        state: present
+
+    - name: Install MySQL Database
+      yum: name=mysql-server state=present
+      
+    - name: Install MySQL-python
+      yum: name=MySQL-python state=present   
+
+    - name: Start & Enable MySQL Server to start on boot
+      service: 
+        name: mysqld
+        state: started
+        enabled: yes
+
+    - name: get root password
+      shell: "grep 'A temporary password is generated for root@localhost' /var/log/mysqld.log | awk -F ' ' '{print $(NF)}'"
+      register: root_password
+
+    - name: update expired root user password
+      command: mysql --user root --password={{ root_password.stdout }} --connect-expired-password --execute="ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mysql_root_password }}';"
+
+    - name: Run mysql_secure_installation
+      command: mysql --user root --password={{ mysql_root_password }} --execute="{{ item }};"
+      with_items:
+        - DELETE FROM mysql.user WHERE User=''
+        - DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')
+        - DROP DATABASE IF EXISTS test
+        - DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'
+        - FLUSH PRIVILEGES
+      changed_when: False
+
+    - name: Add Permision access to mysql with host
+      command: mysql --user root --password={{ mysql_root_password }} --execute="{{ item }};"
+      with_items:
+        - CREATE USER 'administrator'@'192.168.254.131' IDENTIFIED BY 'Cntt@8888'
+        - GRANT ALL PRIVILEGES ON *.* TO 'administrator'@'192.168.254.131' WITH GRANT OPTION
+        - FLUSH PRIVILEGES
+
+    - name: Add port 3306 into firewall
+      firewalld:
+        port: 3306/tcp
+        permanent: yes
+        state: enabled
+        immediate: yes    

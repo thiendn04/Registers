@@ -1,0 +1,16 @@
+---
+#DB
+# - import_playbook: mysql_setup_Centos7.yml
+# - import_playbook: mysql_setup_Ubuntu.yml
+
+#WEB
+#With apache2
+# - import_playbook: install-apache.yml
+# - import_playbook: weblab-apache2-setup.yml
+#- import_playbook: weblab-apache2-update.yml         #chỉ upcode mới
+ 
+####
+#With Nginx
+#- import_playbook: install-nginx.yml
+# - import_playbook: weblab-nginx-setup.yml
+- import_playbook: weblab-nginx-update.yml            #chỉ upcode mới
