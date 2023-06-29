@@ -25,7 +25,7 @@ pipeline {
         stage("Fetch Repository") {
             steps {
                 echo 'Get code from a GitHub repository'
-                git url: 'https://github.com/thiendn04/weblab.git', branch: 'main', credentialsId: 'jenkins-test'
+                git url: 'https://github.com/thiendn04/Registers.git', branch: 'main', credentialsId: 'jenkins-test'
                 echo 'Fetch Repository Completed !'
             }           
             post {
@@ -40,7 +40,7 @@ pipeline {
         stage('Build') {
             steps {
                 nodejs(nodeJSInstallationName: 'NodeJS18.16.0'){
-                sh 'npm install --force'
+                sh 'npm install'
                 }                
             }
         }
@@ -50,7 +50,7 @@ pipeline {
                 def scannerHome = tool 'SONAR-4.8.2856';
                     withSonarQubeEnv("sonar-vprofile") {
                     sh "${tool("SONAR-4.8.2856")}/bin/sonar-scanner \
-                    -Dsonar.projectKey=TodoappNodejs \
+                    -Dsonar.projectKey=Registers \
                     -Dsonar.sources=. \
                     -Dsonar.css.node=. \
                     -Dsonar.host.url=http://192.168.254.128:9000 \
@@ -84,7 +84,7 @@ pipeline {
                     // Tạo tệp tin host và ghi nội dung trong thư mục staging
                     def stag = '''
                         web01 ansible_host=192.168.254.131
-                        db01 ansible_host=192.168.254.134
+                        db01 ansible_host=192.168.254.135
                         
                         [stagingsrvgrp]
                         web01
