@@ -15,7 +15,7 @@ pipeline {
         NEXUS_CREDENTIAL_ID = "NexusserverLogin"
         ARTVERSION = "${env.BUILD_ID}"
         NEXUS_USER = "admin"
-        ARTIFACT_NAME = "weblab"
+        ARTIFACT_NAME = "registers"
 		HYPHEN = "-"
 		VERSION = "1.0.0"
 		ARTIFACT_EXTENSION = "tgz"
@@ -127,7 +127,7 @@ pipeline {
                             reponame: "${NEXUS_REPOSITORY}",
                             artifactname: "${ARTIFACT_NAME}",
 							hyphen: "$HYPHEN",
-                            weblab_version: "${ARTIFACT_NAME}-${VERSION}-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.${ARTIFACT_EXTENSION}"
+                            registers_version: "${ARTIFACT_NAME}-${VERSION}-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.${ARTIFACT_EXTENSION}"
                         ],						
                     )
 		        }

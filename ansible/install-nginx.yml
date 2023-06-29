@@ -3,6 +3,9 @@
   become: yes
   tasks:
 
+    - name: Update timezone
+      command: ln -f -s /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
+
     - name: Update apt repo and cache on all Debian/Ubuntu boxes
       apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
 
@@ -168,7 +171,7 @@
       replace:
         path: /var/www/html/phpmyadmin/config.inc.php
         regexp: 'localhost'
-        replace: '192.168.254.134'
+        replace: '192.168.254.135'
 
   handlers:
     - name: restart_php-fpm

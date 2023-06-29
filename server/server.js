@@ -19,9 +19,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "123456",
+    host: "192.168.254.135",
+    user: "administrator",
+    password: "Cntt@8888",
     database: "signup"
 })
 
