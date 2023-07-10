@@ -1,12 +1,14 @@
 import express from 'express'
 import mysql from 'mysql';
 import cors from 'cors';
-// import { check, validationResult, cookie } from 'express-validator';
+
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import jwt from 'jsonwebtoken'
 import bcrypt, { hash } from 'bcrypt';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+dotenv.config();
 const salt = 10;
 
 const app = express();
@@ -19,10 +21,11 @@ app.use(express.json());
 app.use(cookieParser());
 
 const db = mysql.createConnection({
-    host: "192.168.254.135",
-    user: "administrator",
-    password: "Cntt@8888",
-    database: "signup"
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
+
 })
 
 const verifyUser = (req, res, next) => {
