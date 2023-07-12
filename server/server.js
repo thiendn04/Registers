@@ -27,6 +27,10 @@ const db = mysql.createConnection({
     database: process.env.DATABASE
 
 })
+db.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!!!")
+});
 
 const verifyUser = (req, res, next) => {
     const token = req.cookies.token;
