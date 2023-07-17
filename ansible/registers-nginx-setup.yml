@@ -130,10 +130,32 @@
       shell: mv /var/www/{{ http_host }}/package/server /var/www/{{ http_host }}/public_html	  
 
     - name: Delete dir package
-      command: rm -rf /var/www/{{ http_host }}/package               
+      command: rm -rf /var/www/{{ http_host }}/package    
+
+    - name: Install PM2
+      npm:
+        name: pm2
+        global: yes
+        state: present
+
+    - name: Start Backend server.js
+      command: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
+
+    - name: Add start PM2 crontab when reboot
+      lineinfile:
+        dest: /etc/crontab
+        line: "@reboot sh -c 'cd /var/www/{{ http_host }}/public_html/server && pm2 start server.js'"
+        insertafter: EOF
+      notify: Restart Cron           
 
   handlers:
    - name: Reload Nginx
      service:
       name: nginx
-      state: reloaded
+      state: 
+      
+   - name: Restart Cron
+     service:
+      name: cron
+      state: restarted      
+    
