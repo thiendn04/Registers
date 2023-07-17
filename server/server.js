@@ -13,7 +13,7 @@ const salt = 10;
 
 const app = express();
 app.use(cors({
-    origin: ['http://localhost'],
+    origin: ['http://192.168.254.131'],
     methods: ["POST", "GET"],
     credentials: true
 }));

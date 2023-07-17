@@ -8,7 +8,7 @@ function Home() {
     const [name, setName] = useState('')
     axios.defaults.withCredentials = true;
     useEffect(() => {
-        axios.get('http://localhost:8081')
+        axios.get('http://192.168.254.131:8081')
         .then( res => {
             if(res.data.Status === "Success") {
                 setAuth(true)
@@ -22,7 +22,7 @@ function Home() {
     }, [])
 
     const handleDelete = () =>{
-        axios.get('http://localhost:8081/logout')
+        axios.get('http://192.168.254.131:8081/logout')
         .then(res => {
             window.location.reload(true);
         })
