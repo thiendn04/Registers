@@ -119,12 +119,12 @@
     # - name: Delete dir package
     #   command: rm -rf /var/www/{{ http_host }}/package 
 
-    - name: Add start PM2 crontab when reboot
-      lineinfile:
-        dest: /etc/crontab
-        line: "@reboot sh -c 'cd /var/www/{{ http_host }}/public_html/server && pm2 start server.js'"
-        insertafter: EOF
-      notify: Restart Cron          
+    # - name: Add start PM2 crontab when reboot
+    #   lineinfile:
+    #     dest: /etc/crontab
+    #     line: "@reboot sh -c 'cd /var/www/{{ http_host }}/public_html/server && pm2 start server.js'"
+    #     insertafter: EOF
+    #   notify: Restart Cron          
 
   handlers:
    - name: Reload nginx
@@ -132,7 +132,7 @@
       name: nginx
       state: reloaded
 
-   - name: Restart Cron
-     service:
-      name: cron
-      state: restarted 
+  #  - name: Restart Cron
+  #    service:
+  #     name: cron
+  #     state: restarted 
