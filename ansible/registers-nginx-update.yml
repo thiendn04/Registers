@@ -119,11 +119,11 @@
     # - name: Delete dir package
     #   command: rm -rf /var/www/{{ http_host }}/package 
 
-    # - name: Install PM2
-    #   npm:
-    #     name: pm2
-    #     global: yes
-    #     state: present
+    - name: Install PM2
+      npm:
+        name: pm2
+        global: yes
+        state: present
 
     - name: Start Backend server.js
       command: chdir=/var/www/{{ http_host }}/public_html/server pm2 start server.js
