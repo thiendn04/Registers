@@ -126,7 +126,7 @@
     #     state: present
 
     - name: Kill PM2
-      command: pm2 kill
+      command: chdir=/var/www/{{ http_host }}/public_html/server pm2 delete server.js
 
     - name: Start Backend server.js
       command: chdir=/var/www/{{ http_host }}/public_html/server pm2 start server.js
