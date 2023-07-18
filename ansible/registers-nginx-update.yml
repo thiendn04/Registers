@@ -125,11 +125,14 @@
     #     global: yes
     #     state: present
 
-    - name: Kill PM2
-      command: chdir=/var/www/{{ http_host }}/public_html/server pm2 delete server.js
+    - name: Stop PM2
+      shell: pm2 stop /var/www/registers.local/public_html/server/server.js
+
+    - name: delete PM2
+      shell: pm2 delete /var/www/registers.local/public_html/server/server.js
 
     - name: Start Backend server.js
-      command: chdir=/var/www/{{ http_host }}/public_html/server pm2 start server.js
+      shell: pm2 start /var/www/registers.local/public_html/server/server.js
 
     # - name: Add start PM2 crontab when reboot
     #   lineinfile:
