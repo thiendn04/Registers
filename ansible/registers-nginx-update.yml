@@ -126,13 +126,13 @@
     #     state: present
 
     - name: Stop PM2
-      shell: pm2 stop /var/www/{{ http_host }}/public_html/server/server.js
+      command: pm2 stop /var/www/{{ http_host }}/public_html/server/server.js
 
     - name: delete PM2
-      shell: pm2 delete /var/www/{{ http_host }}/public_html/server/server.js
+      command: pm2 delete /var/www/{{ http_host }}/public_html/server/server.js
 
     - name: Start Backend server.js
-      shell: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
+      command: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
 
     # - name: Add start PM2 crontab when reboot
     #   lineinfile:
