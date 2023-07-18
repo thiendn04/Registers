@@ -126,7 +126,7 @@
         state: present
 
     - name: Start Backend server.js
-      command: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
+      command: chdir=/var/www/{{ http_host }}/public_html/server mp2 start server.js
 
     - name: Add start PM2 crontab when reboot
       lineinfile:
