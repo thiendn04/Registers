@@ -5,7 +5,9 @@ import cors from 'cors';
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import jwt from 'jsonwebtoken'
-import bcrypt, { hash } from 'bcrypt';
+import bcrypt from 'bcryptjs';
+import pkg from 'bcryptjs';
+const { hash } = pkg;
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 dotenv.config();
