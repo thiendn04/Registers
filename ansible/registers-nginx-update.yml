@@ -125,24 +125,19 @@
     #     global: yes
     #     state: present
 
-    # - name: Stop server.js with PM2
-    #   pm2:
-    #     name: server.js
-    #     path: /var/www/{{ http_host }}/public_html/server
-    #     stop: yes
+    - name: Stop and Delete job server.js with PM2
+      block:
+        - name: Change directory to /var/www/{{ http_host }}/public_html/server
+          command: cd /var/www/{{ http_host }}/public_html/server
 
-    - name: Delete server.js with PM2
-      pm2:
-        name: server.js
-        path: /var/www/{{ http_host }}/public_html/server
-        delete: yes
-        force: yes
+        - name: Stop server.js with PM2
+          shell: pm2 stop server.js
+
+        - name: Delete server.js with PM2
+          shell: pm2 Delete server.js
 
     - name: Start server.js with PM2
-      pm2:
-        name: server.js
-        path: /var/www/{{ http_host }}/public_html/server
-        start: yes
+        shell: pm2 start server.js
 
     # - name: Add start PM2 crontab when reboot
     #   lineinfile:
