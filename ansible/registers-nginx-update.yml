@@ -136,8 +136,8 @@
         - name: Delete server.js with PM2
           shell: pm2 Delete server.js
 
-    - name: Start server.js with PM2
-        shell: pm2 start server.js
+        - name: Start server.js with PM2
+          shell: pm2 start server.js
 
     # - name: Add start PM2 crontab when reboot
     #   lineinfile:
