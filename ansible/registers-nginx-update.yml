@@ -140,9 +140,6 @@
       args:
         chdir: /var/www/{{ http_host }}/public_html/server        
 
-    # - name: Start server.js with PM2
-    #   shell: chdir=/var/www/{{ http_host }}/public_html/server pm2 start server.js
-
     # - name: Add start PM2 crontab when reboot
     #   lineinfile:
     #     dest: /etc/crontab
@@ -150,11 +147,11 @@
     #     insertafter: EOF
     #   notify: Restart Cron          
 
-  handlers:
-   - name: Reload nginx
-     service:
-      name: nginx
-      state: reloaded
+  # handlers:
+  #  - name: Reload nginx
+  #    service:
+  #     name: nginx
+  #     state: reloaded
 
   #  - name: Restart Cron
   #    service:
