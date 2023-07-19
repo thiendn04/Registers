@@ -126,15 +126,15 @@
     #     state: present
 
     - name: Stop Node.js server
-      shell: "pm2 stop server.js"
+      shell: pm2 stop server.js
       chdir: /var/www/{{ http_host }}/public_html/server
 
     - name: Delete Node.js server
-      shell: "pm2 delete server.js"
+      shell: pm2 delete server.js
       chdir: /var/www/{{ http_host }}/public_html/server
 
     - name: Start Node.js server
-      shell: "pm2 start server.js"
+      shell: pm2 start server.js
       chdir: /var/www/{{ http_host }}/public_html/server        
 
     # - name: Start server.js with PM2
