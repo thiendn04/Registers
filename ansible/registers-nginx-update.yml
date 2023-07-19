@@ -119,17 +119,17 @@
     # - name: Delete dir package
     #   command: rm -rf /var/www/{{ http_host }}/package 
 
-    - name: Install PM2
-      npm:
-        name: pm2
-        global: yes
-        state: present
+    # - name: Install PM2
+    #   npm:
+    #     name: pm2
+    #     global: yes
+    #     state: present
     
-    # - name: Start server.js, if not running
-    #   pm2:
-    #     name: server.js
-    #     script: /var/www/{{ http_host }}/public_html/server
-    #     state: started
+    - name: Start server with process config file, if not running
+      pm2:
+        name: server
+        config: /var/www/{{ http_host }}/public_html/server/server.js
+        state: started
 
 
     # - name: Add start PM2 crontab when reboot
