@@ -125,14 +125,24 @@
     #     global: yes
     #     state: present
 
-    - name: Stop PM2
-      command: pm2 stop /var/www/{{ http_host }}/public_html/server/server.js
+    - name: Stop server.js with PM2
+      pm2:
+        name: server.js
+        path: /var/www/{{ http_host }}/public_html/server
+        stop: yes
 
-    - name: delete PM2
-      command: pm2 delete /var/www/{{ http_host }}/public_html/server/server.js
+    - name: Delete server.js with PM2
+      pm2:
+        name: server.js
+        path: /var/www/{{ http_host }}/public_html/server
+        delete: yes
+        force: yes
 
-    - name: Start Backend server.js
-      command: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
+    - name: Start server.js with PM2
+      pm2:
+        name: server.js
+        path: /var/www/{{ http_host }}/public_html/server
+        start: yes
 
     # - name: Add start PM2 crontab when reboot
     #   lineinfile:
