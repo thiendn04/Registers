@@ -125,11 +125,6 @@
     #     global: yes
     #     state: present
 
-    - name: Install PM2
-      apt:
-        name: pm2
-        state: present
-
     - name: Stop server.js with PM2
       pm2:
         name: server.js
