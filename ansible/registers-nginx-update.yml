@@ -126,19 +126,32 @@
     #     state: present
 
     - name: Stop Node.js server
-      command: pm2 stop server.js
-      args:
-        chdir: /var/www/{{ http_host }}/public_html/server
+      shell: pm2 stop /var/www/{{ http_host }}/public_html/server/server.js
+      register: stop_result
+      ignore_errors: yes
 
-    - name: Delete Node.js server
-      command: pm2 delete server.js
-      args:
-        chdir: /var/www/{{ http_host }}/public_html/server
+    - name: Delete Node.js server from PM2
+      shell: pm2 delete /var/www/{{ http_host }}/public_html/server/server.js
+      register: delete_result
+      ignore_errors: yes
+      when: stop_result|failed
 
     - name: Start Node.js server
-      command: pm2 start server.js
-      args:
-        chdir: /var/www/{{ http_host }}/public_html/server        
+      shell: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
+      register: start_result
+      when: delete_result|failed or stop_result|failed
+
+    - name: Display success message if server started
+      debug:
+        msg: "Node.js server started successfully"
+      when: start_result|success
+      changed_when: start_result|changed
+
+    - name: Display error message if server failed to start
+      debug:
+        msg: "Failed to start Node.js server"
+      when: start_result|failed
+      failed_when: start_result|failed       
 
     # - name: Add start PM2 crontab when reboot
     #   lineinfile:
