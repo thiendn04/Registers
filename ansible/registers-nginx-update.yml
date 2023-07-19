@@ -126,19 +126,13 @@
     #     state: present
 
     - name: Stop server.js with PM2
-      shell: pm2 stop /var/www/{{ http_host }}/public_html/server/server.js
-      args: 
-        chdir: /var/www/{{ http_host }}/public_html/server
+      shell: chdir=/var/www/{{ http_host }}/public_html/server pm2 stop server.js
 
     - name: Delete server.js with PM2
-      shell: pm2 Delete /var/www/{{ http_host }}/public_html/server/server.js
-      args: 
-        chdir: /var/www/{{ http_host }}/public_html/server
+      shell: chdir=/var/www/{{ http_host }}/public_html/server pm2 delete server.js
 
-    - name: Start server.js with PM2
-      shell: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
-      args: 
-        chdir: /var/www/{{ http_host }}/public_html/server
+    # - name: Start server.js with PM2
+    #   shell: chdir=/var/www/{{ http_host }}/public_html/server pm2 start server.js
 
     # - name: Add start PM2 crontab when reboot
     #   lineinfile:
