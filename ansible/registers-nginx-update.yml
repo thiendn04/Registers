@@ -125,11 +125,11 @@
     #     global: yes
     #     state: present
 
-    - name: Stop server.js with PM2
-      pm2:
-        name: server.js
-        path: /var/www/{{ http_host }}/public_html/server
-        stop: yes
+    # - name: Stop server.js with PM2
+    #   pm2:
+    #     name: server.js
+    #     path: /var/www/{{ http_host }}/public_html/server
+    #     stop: yes
 
     - name: Delete server.js with PM2
       pm2:
