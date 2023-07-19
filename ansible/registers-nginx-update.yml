@@ -125,11 +125,11 @@
         global: yes
         state: present
     
-    - name: Start server.js, if not running
-      pm2:
-        name: server.js
-        script: /var/www/{{ http_host }}/public_html/server
-        state: started
+    # - name: Start server.js, if not running
+    #   pm2:
+    #     name: server.js
+    #     script: /var/www/{{ http_host }}/public_html/server
+    #     state: started
 
 
     # - name: Add start PM2 crontab when reboot
