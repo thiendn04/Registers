@@ -144,7 +144,7 @@
     - name: Add start PM2 crontab when reboot
       lineinfile:
         dest: /etc/crontab
-        line: "@reboot sh -c 'cd /var/www/{{ http_host }}/public_html/server && pm2 start server.js'"
+        line: "@reboot root sh -c 'cd /var/www/{{ http_host }}/public_html/server && pm2 start server.js'"
         insertafter: EOF
       notify: Restart Cron           
 
@@ -152,7 +152,7 @@
    - name: Reload Nginx
      service:
       name: nginx
-      state: 
+      state: reloaded
       
    - name: Restart Cron
      service:
