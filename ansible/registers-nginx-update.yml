@@ -119,7 +119,7 @@
     # - name: Delete dir package
     #   command: rm -rf /var/www/{{ http_host }}/package 
 
-    - name: Kill pm2
+    - name: Kill server.js with pm2
       command: pm2 kill
 
     - name: Delete Node_modules Server
@@ -128,7 +128,7 @@
     - name: change directory and install dependencies Server
       command: chdir=/var/www/{{ http_host }}/public_html/server npm install 
 
-    - name: Start pm2 
+    - name: Start server.js with pm2 
       command: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
 
   # handlers:
