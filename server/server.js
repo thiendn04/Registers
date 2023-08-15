@@ -27,9 +27,7 @@ const db = mysql.createConnection({
     user: process.env.USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
-    port: process.env.PORT,
-    connectionLimit: 10
-
+    port: process.env.PORT
 })
 db.connect(function(err) {
     if (err) throw err;
