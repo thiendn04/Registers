@@ -128,7 +128,13 @@
     - name: change directory and install dependencies Server
       command: chdir=/var/www/{{ http_host }}/public_html/server npm install 
 
-    - name: Start server.js with pm2 
+    - name: Start server.js, if not running
+      pm2:
+        name: server
+        script: /var/www/{{ http_host }}/public_html/server/server.js
+        state: started
+
+    # - name: Start server.js with pm2 
       command: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
 
   # handlers:
