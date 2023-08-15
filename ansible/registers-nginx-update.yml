@@ -120,7 +120,7 @@
     #   command: rm -rf /var/www/{{ http_host }}/package 
 
     - name: Start Backend server.js
-      command: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
+      command: pm2 start --user administrator /var/www/{{ http_host }}/public_html/server/server.js
 
   # handlers:
   #  - name: Reload nginx
