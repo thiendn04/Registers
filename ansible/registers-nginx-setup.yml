@@ -130,7 +130,13 @@
       shell: mv /var/www/{{ http_host }}/package/server /var/www/{{ http_host }}/public_html	  
 
     - name: Delete dir package
-      command: rm -rf /var/www/{{ http_host }}/package    
+      command: rm -rf /var/www/{{ http_host }}/package
+
+    - name: Delete Node_modules Server
+      command: rm -rf /var/www/{{ http_host }}/public_html/server/node_modules
+
+    - name: change directory and install dependencies Server
+      command: chdir=/var/www/{{ http_host }}/public_html/server npm install       
 
     - name: Install PM2
       npm:
