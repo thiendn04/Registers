@@ -129,7 +129,7 @@
       command: pm2 kill
 
     - name: Start server.js with pm2 
-      shell: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
+      command: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
 
   # handlers:
   #  - name: Reload nginx
