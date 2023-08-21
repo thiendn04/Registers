@@ -147,6 +147,18 @@
     - name: Start Backend server.js
       command: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
 
+    - name: Delete Node_modules Server
+      command: rm -rf /var/www/{{ http_host }}/public_html/server/node_modules
+
+    - name: change directory and install dependencies Server
+      command: chdir=/var/www/{{ http_host }}/public_html/server npm install 
+
+    - name: Kill server.js with pm2
+      command: pm2 kill
+
+    - name: Start server.js with pm2 
+      command: pm2 start /var/www/{{ http_host }}/public_html/server/server.js
+
     - name: Add start PM2 crontab when reboot
       lineinfile:
         dest: /etc/crontab
