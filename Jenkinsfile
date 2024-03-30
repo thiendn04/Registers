@@ -49,7 +49,7 @@ pipeline {
                 script {
                 def scannerHome = tool 'SONAR-5.1.3006';
                     withSonarQubeEnv("sonar-webapp") {
-                    sh "${tool("SONAR-4.8.2856")}/bin/sonar-scanner \
+                    sh "${tool("SONAR-5.1.3006")}/bin/sonar-scanner \
                     -Dsonar.projectKey=Registers \
                     -Dsonar.sources=. \
                     -Dsonar.css.node=. \
