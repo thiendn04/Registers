@@ -47,14 +47,14 @@ pipeline {
         stage('Code Quality Check via SonarQube') {
             steps {
                 script {
-                def scannerHome = tool 'SONAR-4.8.2856';
-                    withSonarQubeEnv("sonar-vprofile") {
+                def scannerHome = tool 'SONAR-5.1.3006';
+                    withSonarQubeEnv("sonar-webapp") {
                     sh "${tool("SONAR-4.8.2856")}/bin/sonar-scanner \
                     -Dsonar.projectKey=Registers \
                     -Dsonar.sources=. \
                     -Dsonar.css.node=. \
                     -Dsonar.host.url=http://192.168.1.101:9000 \
-                    -Dsonar.login=squ_1dfc93f7ed0dd1b8f251942e471bb6ed21ffdbec"
+                    -Dsonar.login=squ_6a749ab0e3747a055da69d6432e555e27feb4f34"
                }
             }
             timeout(time: 10, unit: 'MINUTES') {
