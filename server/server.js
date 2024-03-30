@@ -15,7 +15,7 @@ const salt = 10;
 
 const app = express();
 app.use(cors({
-    origin: ['http://192.168.254.131'],
+    origin: ['http://registers.webapp.local'],
     methods: ["POST", "GET"],
     credentials: true
 }));

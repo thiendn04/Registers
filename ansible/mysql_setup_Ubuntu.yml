@@ -61,8 +61,8 @@
     - name: Add Permision access to mysql with host
       command: mysql --user root --password={{ mysql_root_password }} --execute="{{ item }};"
       with_items:
-        - CREATE USER 'root'@'192.168.254.131' IDENTIFIED WITH mysql_native_password BY 'Khoi@8888'
-        - GRANT ALL PRIVILEGES ON *.* TO 'root'@'192.168.254.131' WITH GRANT OPTION
+        - CREATE USER 'root'@'192.168.1.150' IDENTIFIED WITH mysql_native_password BY 'Khoi@8888'
+        - GRANT ALL PRIVILEGES ON *.* TO 'root'@'192.168.1.150' WITH GRANT OPTION
         - FLUSH PRIVILEGES
 
     - name: Search and edit file mysqld.cnf

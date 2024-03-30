@@ -1,6 +1,6 @@
 mysql_root_password:  Khoi@8888
-http_host:  registers.local
-http_conf:  registers.local.conf
+http_host:  registers.webapp.local
+http_conf:  registers.webapp.local.conf
 
 http_port:  "80"
 

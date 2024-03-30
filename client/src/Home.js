@@ -22,7 +22,7 @@ function Home() {
     }, [])
 
     const handleDelete = () =>{
-        axios.get('http://192.168.254.131:8081/logout')
+        axios.get('http://registers.webapp.local:8081/logout')
         .then(res => {
             window.location.reload(true);
         })

@@ -1,7 +1,7 @@
 ---
 #DB
 # - import_playbook: mysql_setup_Centos7.yml
-# - import_playbook: mysql_setup_Ubuntu.yml
+#- import_playbook: mysql_setup_Ubuntu.yml
 
 #WEB
 #With apache2
@@ -11,8 +11,8 @@
  
 ####
 #With Nginx
-# - import_playbook: install-nginx.yml
-# # # - import_playbook: mysql_setup_Ubuntu.yml
-# - import_playbook: registers-nginx-setup.yml
+- import_playbook: install-nginx.yml
+- import_playbook: mysql_setup_Ubuntu.yml
+- import_playbook: registers-nginx-setup.yml
 
-- import_playbook: registers-nginx-update.yml            #chỉ upcode mới
+#- import_playbook: registers-nginx-update.yml            #chỉ upcode mới
