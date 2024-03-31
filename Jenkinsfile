@@ -56,16 +56,16 @@ pipeline {
                     -Dsonar.host.url=http://192.168.1.101:9000 \
                     -Dsonar.login=squ_6a749ab0e3747a055da69d6432e555e27feb4f34"
                }
-            }
-			}
-        stage('Quality Gates') {     
+            }  
+		}
+        stage('Quality Gates'){
             timeout(time: 1, unit: 'HOURS') {
            def qg = waitForQualityGate() 
            if (qg.status != 'OK') {
-           error "Pipeline aborted due to quality gate failure: ${qg.status}"
+              error "Pipeline aborted due to quality gate failure: ${qg.status}"
+            }
            }
         }
-		}
 		stage('Publish to Nexus Repository Manager') {
             steps {
                     //sh "npm version --no-git-tag-version --allow-same-version=false --prefix ./ $version-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}"
