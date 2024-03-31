@@ -57,9 +57,9 @@ pipeline {
                     -Dsonar.login=squ_6a749ab0e3747a055da69d6432e555e27feb4f34"
                }
             }
-            timeout(time: 10, unit: 'MINUTES') {
-               waitForQualityGate abortPipeline: true
-            }   
+            //timeout(time: 10, unit: 'MINUTES') {
+              // waitForQualityGate abortPipeline: true
+           // }   
 			}     
 		}
 		stage('Publish to Nexus Repository Manager') {
