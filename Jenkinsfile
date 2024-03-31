@@ -62,12 +62,12 @@ pipeline {
            }   
 			}     
 		}
-		// stage('Publish to Nexus Repository Manager') {
-        //     steps {
-        //             //sh "npm version --no-git-tag-version --allow-same-version=false --prefix ./ $version-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}"
-        //             sh 'npm publish'
-        //     }
-		// }
+		stage('Publish to Nexus Repository Manager') {
+            steps {
+                    //sh "npm version --no-git-tag-version --allow-same-version=false --prefix ./ $version-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}"
+                    sh 'npm publish'
+            }
+		}
 		
 		// stage('Deploy to Staging-Ansible'){
 		//     steps {
