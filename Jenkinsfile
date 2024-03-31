@@ -16,7 +16,6 @@ pipeline {
         ARTVERSION = "${env.BUILD_ID}"
         NEXUS_USER = "admin"
         ARTIFACT_NAME = "registers"
-        TIMESTAMP_FORMAT = 'yyyy-MM-dd_HH-mm'
 		HYPHEN = "-"
 		VERSION = "1.0.0"
 		ARTIFACT_EXTENSION = "tgz"
@@ -65,14 +64,8 @@ pipeline {
 		}
 		stage('Publish to Nexus Repository Manager') {
             steps {
-                    //sh "npm version --no-git-tag-version --allow-same-version=false --prefix ./ $version-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}"
-                    //sh 'npm publish'
-                script {
-                    def formattedTimestamp = new Date().format(env.TIMESTAMP_FORMAT)
-                    def versionWithTimestamp = "${env.VERSION}-${env.BUILD_ID}-${formattedTimestamp}"
-                    sh "npm version --no-git-tag-version --allow-same-version=false --prefix ./ ${versionWithTimestamp}"
+                    sh "npm version --no-git-tag-version --allow-same-version=false --prefix ./ $version-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}"
                     sh 'npm publish'
-                }                    
             }
 		}
 		
