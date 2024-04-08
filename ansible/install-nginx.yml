@@ -1,6 +1,6 @@
 - name: Ansible Playbook to Install and Setup Apache on Ubuntu
   hosts: stagingsrvgrp
-  become: yes
+  become: true
   tasks:
 
     - name: Update timezone
