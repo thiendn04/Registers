@@ -2,7 +2,7 @@
 - name: MySQL Server Setup
   hosts: dbsrvgrp
   become: yes
-
+  become_method: sudo
   tasks:
   
     - name: Update timezone
