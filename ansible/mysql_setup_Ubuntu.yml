@@ -1,7 +1,7 @@
 ---
 - name: MySQL Server Setup
   hosts: dbsrvgrp
-  become: true
+  become: yes
 
   tasks:
   

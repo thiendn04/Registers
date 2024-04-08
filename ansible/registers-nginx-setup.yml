@@ -1,7 +1,7 @@
 
 - name: Setup Apache2 & Deploy Artifact
   hosts: stagingsrvgrp
-  become: true
+  become: yes
   vars:
     timestamp: "{{ansible_date_time.date}}_{{ansible_date_time.hour}}_{{ansible_date_time.minute}}"
   tasks:
