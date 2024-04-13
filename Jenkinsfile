@@ -8,9 +8,9 @@ pipeline {
      environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "192.168.120.102:8081"
+        NEXUS_URL = "192.168.225.102:8081"
         NEXUSPORT = "8081"
-        NEXUS_IP = "192.168.120.102"
+        NEXUS_IP = "192.168.225.102"
         NEXUS_REPOSITORY = "npm-private"
         NEXUS_CREDENTIAL_ID = "NexusserverLogin"
         ARTVERSION = "${env.BUILD_ID}"
@@ -53,7 +53,7 @@ pipeline {
                     -Dsonar.projectKey=Registers \
                     -Dsonar.sources=. \
                     -Dsonar.css.node=. \
-                    -Dsonar.host.url=http://192.168.120.101:9000 \
+                    -Dsonar.host.url=http://192.168.225.101:9000 \
                     -Dsonar.login=squ_6a749ab0e3747a055da69d6432e555e27feb4f34"
                }
             }
@@ -83,8 +83,8 @@ pipeline {
 					
                     // Tạo tệp tin host và ghi nội dung trong thư mục staging
                     def stag = '''
-                        web01 ansible_host=192.168.120.150
-                        db01 ansible_host=192.168.120.155
+                        web01 ansible_host=192.168.225.110
+                        db01 ansible_host=192.168.225.111
                         
                         [stagingsrvgrp]
                         web01
@@ -101,7 +101,7 @@ pipeline {
 					
                     // Tạo tệp tin host và ghi nội dung trong thư mục prod
                     def pro = '''
-                        web02 ansible_host=192.168.120.151
+                        web02 ansible_host=192.168.225.112
 
                         [appsrvgrp]
                         web02
