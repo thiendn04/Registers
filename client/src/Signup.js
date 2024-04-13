@@ -16,7 +16,7 @@ function Signup() {
         const err = Validation(values);
         setErrors(err);
         if(err.name === "" && err.email === "" && err.password === "") {
-            axios.post('http://192.168.120.150:8081/signup', values)
+            axios.post('http://192.168.255.110:8081/signup', values)
             .then(res => {
                 if(res.data.Status === "Success") {
                     navigate('/')
