@@ -54,7 +54,7 @@ pipeline {
                     -Dsonar.sources=. \
                     -Dsonar.css.node=. \
                     -Dsonar.host.url=http://192.168.225.101:9000 \
-                    -Dsonar.login=squ_57a5e4b1bd816a02d7144af6fb478ac8c8324bc7
+                    -Dsonar.login=squ_57a5e4b1bd816a02d7144af6fb478ac8c8324bc7"
                }
             }
             timeout(time: 10, unit: 'MINUTES') {
