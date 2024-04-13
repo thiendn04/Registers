@@ -1,5 +1,5 @@
 
-- name: Setup Apache2 & Deploy Artifact
+- name: Setup Nginx & Deploy Artifact
   hosts: stagingsrvgrp
   become: yes
   become_method: sudo
