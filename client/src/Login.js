@@ -10,7 +10,7 @@ function Login() {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
     useEffect(() => {
-        axios.get('http://192.168.255.110:8081')
+        axios.get('http://192.168.225.110:8081')
         .then( res => {
             if(res.data.Status === "Success") {
                 navigate('/home')
@@ -22,7 +22,7 @@ function Login() {
     }, [navigate])
     const handleSubmit =(event) => {
         event.preventDefault();
-        axios.post('http://192.168.255.110:8081/login', values)
+        axios.post('http://192.168.225.110:8081/login', values)
         .then(res => {
             if(res.data.Status === "Success") {
                 navigate('/home');
