@@ -118,11 +118,6 @@
         name: nodejs
         state: present
 
-    - name: Install npm
-      npm:
-        name: npm
-        state: present 
-
     - name: change directory and install dependencies
       command: chdir=/var/www/{{ http_host }}/package/client npm install
 
