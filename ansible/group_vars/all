@@ -2,6 +2,13 @@ mysql_root_password:  Khoi@8888
 http_host:  registers.webapp.local
 http_conf:  registers.webapp.local.conf
 
+jenkins_ip: 192.168.225.100
+sonar_ip: 192.168.225.101
+nexus_ip: 192.168.225.12
+web1_ip: 192.168.225.110
+web2_ip: 192.168.225.102
+db1_ip: 192.168.225.111
+
 http_port:  "80"
 
 ufw_port: 

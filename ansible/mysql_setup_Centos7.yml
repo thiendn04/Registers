@@ -64,8 +64,8 @@
     - name: Add Permision access to mysql with host
       command: mysql --user root --password={{ mysql_root_password }} --execute="{{ item }};"
       with_items:
-        - CREATE USER 'administrator'@'192.168.254.131' IDENTIFIED BY 'Cntt@8888'
-        - GRANT ALL PRIVILEGES ON *.* TO 'administrator'@'192.168.254.131' WITH GRANT OPTION
+        - CREATE USER 'administrator'@'192.168.225.110' IDENTIFIED BY 'Cntt@8888'
+        - GRANT ALL PRIVILEGES ON *.* TO 'administrator'@'192.168.225.110' WITH GRANT OPTION
         - FLUSH PRIVILEGES
 
     - name: Add port 3306 into firewall

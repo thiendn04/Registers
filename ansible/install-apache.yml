@@ -186,7 +186,7 @@
       replace:
         path: /var/www/html/phpmyadmin/config.inc.php
         regexp: 'localhost'
-        replace: '192.168.254.134'
+        replace: "{{ db1_ip }}"
 
   handlers:
     - name: restart-apache
