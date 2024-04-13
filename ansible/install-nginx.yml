@@ -172,7 +172,7 @@
       replace:
         path: /var/www/html/phpmyadmin/config.inc.php
         regexp: 'localhost'
-        replace: "{{ db1_ip }}"
+        replace: '{{ db1_ip }}'
 
   handlers:
     - name: restart_php-fpm

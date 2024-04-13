@@ -4,7 +4,7 @@ http_conf:  registers.webapp.local.conf
 
 jenkins_ip: 192.168.225.100
 sonar_ip: 192.168.225.101
-nexus_ip: 192.168.225.12
+nexus_ip: 192.168.225.102
 web1_ip: 192.168.225.110
 web2_ip: 192.168.225.102
 db1_ip: 192.168.225.111
