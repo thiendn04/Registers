@@ -12,7 +12,7 @@ pipeline {
         NEXUSPORT = "8081"
         NEXUS_IP = "192.168.225.102"
         NEXUS_REPOSITORY = "npm-private"
-        NEXUS_CREDENTIAL_ID = 'NexusserverLogin'
+        NEXUS_CREDENTIAL_ID = "NexusserverLogin"
         ARTVERSION = "${env.BUILD_ID}"
         NEXUS_USER = "admin"
         ARTIFACT_NAME = "registers"
@@ -122,7 +122,8 @@ pipeline {
                         playbook: 'ansible/site.yml',
                         extraVars: [
                             USER: "${NEXUS_USER}",
-                            PASS: "${NEXUS_CREDENTIAL_ID}",
+                            //PASS: "${NEXUS_CREDENTIAL_ID}",
+                            PASS: 'NexusserverLogin',
                             nexusip: "${NEXUS_IP}",
                             reponame: "${NEXUS_REPOSITORY}",
                             artifactname: "${ARTIFACT_NAME}",
