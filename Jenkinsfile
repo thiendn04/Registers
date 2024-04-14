@@ -12,7 +12,7 @@ pipeline {
         NEXUSPORT = "8081"
         NEXUS_IP = "192.168.225.102"
         NEXUS_REPOSITORY = "npm-private"
-        NEXUS_CREDENTIAL_ID = "NexusserverLogin"
+        NEXUS_CREDENTIAL_ID = "Nexus_login_credential"
         ARTVERSION = "${env.BUILD_ID}"
         NEXUS_USER = "admin"
         ARTIFACT_NAME = "registers"
