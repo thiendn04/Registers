@@ -1,5 +1,5 @@
 
-- name: Setup Apache2 & Deploy Artifact
+- name: Update new code from git
   hosts: stagingsrvgrp
   become: yes
   vars:
@@ -8,7 +8,10 @@
     
     - name: Download latest weblab.tgz from nexus
       get_url:
-        url: "http://{{USER}}:{{PASS}}@{{nexusip}}:8081/repository/{{reponame}}/{{artifactname}}/{{hyphen}}/{{registers_version}}"
+        #url: "http://{{USER}}:{{PASS}}@{{nexusip}}:8081/repository/{{reponame}}/{{artifactname}}/{{hyphen}}/{{registers_version}}"
+        url: "http://{{nexusip}}:8081/repository/{{reponame}}/{{artifactname}}/{{hyphen}}/{{registers_version}}"
+        user: '{{ USER }}'
+        password: {{ PASS }}
         dest: "/tmp/registersapp-{{registers_version}}"
       register: tgzdeploy
       tags:
