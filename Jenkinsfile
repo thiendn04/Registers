@@ -14,7 +14,7 @@ pipeline {
         NEXUS_REPOSITORY = "npm-private"
         NEXUS_CREDENTIAL_ID = "Nexus_login_credential"
         ARTVERSION = "${env.BUILD_ID}"
-        NEXUS_USER = "admin"
+        NEXUS_USER = "jenkins-user"
         ARTIFACT_NAME = "registers"
 		HYPHEN = "-"
 		VERSION = "1.0.0"
