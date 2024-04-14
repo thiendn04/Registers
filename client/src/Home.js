@@ -8,7 +8,7 @@ function Home() {
     const [name, setName] = useState('')
     axios.defaults.withCredentials = true;
     useEffect(() => {
-        axios.get('http://192.168.125.110:8081')
+        axios.get('http://192.168.225.110:8081')
         .then( res => {
             if(res.data.Status === "Success") {
                 setAuth(true)
