@@ -8,7 +8,7 @@
     
     - name: Download latest weblab.tgz from nexus
       get_url:
-        url: "http://{{USER}}:{{PASS}}@{{nexusip}}:8081/repository/{{reponame}}/{{artifactname}}/{{hyphen}}/{{registers_version}}"
+        url: "http://{{PASS}}@{{nexusip}}:8081/repository/{{reponame}}/{{artifactname}}/{{hyphen}}/{{registers_version}}"
         dest: "/tmp/registersapp-{{registers_version}}"
       register: tgzdeploy
       tags:
