@@ -12,7 +12,7 @@
         url: "http://{{nexusip}}:8081/repository/{{reponame}}/{{artifactname}}/{{hyphen}}/{{registers_version}}"
         dest: "/tmp/registersapp-{{registers_version}}"
         url_username: "{{ USER }}"
-        url_password: "{{ PASS }}" 
+        url_password: "Cntt123" 
       register: tgzdeploy
       tags:
        - deploy
