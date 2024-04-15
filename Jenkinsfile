@@ -13,8 +13,7 @@ pipeline {
         NEXUS_IP = "192.168.225.102"
         NEXUS_REPOSITORY = "npm-private"
         ARTVERSION = "${env.BUILD_ID}"
-        NEXUS_USER = credentials('nexus_login_credential')
-        NEXUS_PASS = credentials('nexus_login_credential')
+        NEXUS_USER = "admin"
         ARTIFACT_NAME = "registers"
 		HYPHEN = "-"
 		VERSION = "1.0.0"
@@ -114,8 +113,8 @@ pipeline {
                         echo '${trimmedPro}' > inventories/prod/hosts 
                     """					
                 withCredentials([
-                    usernamePassword(credentialsId: 'nexus_login_credential', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')
-                ]) {                    
+                    usernamePassword(credentialsId: 'nexus-credentials-id', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')
+                ]) {            
                     ansiblePlaybook(
 						credentialsId: 'weblab-staging-ssh-login',
 						disableHostKeyChecking: true,
