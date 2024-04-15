@@ -13,7 +13,7 @@ pipeline {
         NEXUS_IP = "192.168.225.102"
         NEXUS_REPOSITORY = "npm-private"
         ARTVERSION = "${env.BUILD_ID}"
-        NEXUS_USER = "admin"
+        //NEXUS_USER = "admin"
         ARTIFACT_NAME = "registers"
 		HYPHEN = "-"
 		VERSION = "1.0.0"
