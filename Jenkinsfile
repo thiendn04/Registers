@@ -113,11 +113,7 @@ pipeline {
                         echo '${trimmedPro}' > inventories/prod/hosts 
                     """					
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'nexus_login_credential', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
-                    sh 'echo $PASSWORD'
-                    // also available as a Groovy variable
-                    echo USERNAME
-                    // or inside double quotes for string interpolation
-                    echo "username is $USERNAME"                        
+                        sh 'echo uname=$USERNAME pwd=$PASSWORD'                        
                     }                 
                     ansiblePlaybook(
 						credentialsId: 'weblab-staging-ssh-login',
