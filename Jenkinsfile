@@ -113,22 +113,22 @@ pipeline {
                     """
                     //Lấy username password Nexus repo					
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'nexus_login_credential', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){            
-                    ansiblePlaybook(
-						credentialsId: 'weblab-staging-ssh-login',
-						disableHostKeyChecking: true,
-                        colorized: true,
-                        inventory: 'inventories/staging/hosts',
-                        playbook: 'ansible/site.yml',
-                        extraVars: [
-                            USER: "${USERNAME}",
-                            PASS: "${PASSWORD}",
-                            nexusip: "${NEXUS_IP}",
-                            reponame: "${NEXUS_REPOSITORY}",
-                            artifactname: "${ARTIFACT_NAME}",
-							hyphen: "$HYPHEN",
-                            registers_version: "${ARTIFACT_NAME}-${VERSION}-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.${ARTIFACT_EXTENSION}"
-                        ],						
-                    )
+                        ansiblePlaybook(
+                            credentialsId: 'weblab-staging-ssh-login',
+                            disableHostKeyChecking: true,
+                            colorized: true,
+                            inventory: 'inventories/staging/hosts',
+                            playbook: 'ansible/site.yml',
+                            extraVars: [
+                                USER: "${USERNAME}",
+                                PASS: "${PASSWORD}",
+                                nexusip: "${NEXUS_IP}",
+                                reponame: "${NEXUS_REPOSITORY}",
+                                artifactname: "${ARTIFACT_NAME}",
+                                hyphen: "$HYPHEN",
+                                registers_version: "${ARTIFACT_NAME}-${VERSION}-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.${ARTIFACT_EXTENSION}"
+                            ],						
+                        )
                     }
 		        }
 		    }
