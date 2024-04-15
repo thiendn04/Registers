@@ -113,6 +113,9 @@ pipeline {
                     sh """
                         echo '${trimmedPro}' > inventories/prod/hosts 
                     """					
+                withCredentials([
+                    usernamePassword(credentialsId: 'nexus_login_credential', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')
+                ]) {                    
                     ansiblePlaybook(
 						credentialsId: 'weblab-staging-ssh-login',
 						disableHostKeyChecking: true,
@@ -128,7 +131,7 @@ pipeline {
 							hyphen: "$HYPHEN",
                             registers_version: "${ARTIFACT_NAME}-${VERSION}-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.${ARTIFACT_EXTENSION}"
                         ],						
-                    )
+                    )}
 		        }
 		    }
 		}		
