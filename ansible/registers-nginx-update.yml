@@ -14,7 +14,7 @@
         #headers: 
           #Authorization: "Basic {{ ('${USERNAME}:${PASSWORD}' | b64encode) }}"
         #force_basic_auth: yes
-        validate_certs: yes 
+        #validate_certs: yes 
       register: tgzdeploy
       tags:
        - deploy
