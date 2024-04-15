@@ -112,7 +112,7 @@ pipeline {
                         echo '${trimmedPro}' > inventories/prod/hosts 
                     """
                     //Lấy username password Nexus repo					
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'nexus_login_credential', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){            
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'nexus_login_credential', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS']]){            
                         ansiblePlaybook(
                             credentialsId: 'weblab-staging-ssh-login',
                             disableHostKeyChecking: true,
@@ -120,8 +120,8 @@ pipeline {
                             inventory: 'inventories/staging/hosts',
                             playbook: 'ansible/site.yml',
                             extraVars: [
-                                USER: "${USERNAME}",
-                                PASS: "${PASSWORD}",
+                                USER: "${NEXUS_USER}",
+                                PASS: "${NEXUS_PASS}",
                                 nexusip: "${NEXUS_IP}",
                                 reponame: "${NEXUS_REPOSITORY}",
                                 artifactname: "${ARTIFACT_NAME}",
