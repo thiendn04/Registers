@@ -112,7 +112,13 @@ pipeline {
                     sh """
                         echo '${trimmedPro}' > inventories/prod/hosts 
                     """					
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'nexus_login_credential', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS']]){                 
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'nexus_login_credential', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
+                    sh 'echo $PASSWORD'
+                    // also available as a Groovy variable
+                    echo USERNAME
+                    // or inside double quotes for string interpolation
+                    echo "username is $USERNAME"                        
+                    }                 
                     ansiblePlaybook(
 						credentialsId: 'weblab-staging-ssh-login',
 						disableHostKeyChecking: true,
@@ -120,15 +126,15 @@ pipeline {
                         inventory: 'inventories/staging/hosts',
                         playbook: 'ansible/site.yml',
                         extraVars: [
-                            USER: "${NEXUS_USER}",
-                            PASS: "${NEXUS_PASS}",
+                            //USER: "${NEXUS_USER}",
+                            //PASS: "${NEXUS_PASS}",
                             nexusip: "${NEXUS_IP}",
                             reponame: "${NEXUS_REPOSITORY}",
                             artifactname: "${ARTIFACT_NAME}",
 							hyphen: "$HYPHEN",
                             registers_version: "${ARTIFACT_NAME}-${VERSION}-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.${ARTIFACT_EXTENSION}"
                         ],						
-                    )}
+                    )
 		        }
 		    }
 		}		
