@@ -13,7 +13,6 @@ pipeline {
         NEXUS_IP = "192.168.225.102"
         NEXUS_REPOSITORY = "npm-private"
         ARTVERSION = "${env.BUILD_ID}"
-        //NEXUS_USER = "admin"
         ARTIFACT_NAME = "registers"
 		HYPHEN = "-"
 		VERSION = "1.0.0"
@@ -111,7 +110,8 @@ pipeline {
                     
                     sh """
                         echo '${trimmedPro}' > inventories/prod/hosts 
-                    """					
+                    """
+                    //Lấy username password Nexus repo					
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'nexus_login_credential', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){            
                     ansiblePlaybook(
 						credentialsId: 'weblab-staging-ssh-login',
