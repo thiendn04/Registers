@@ -112,9 +112,7 @@ pipeline {
                     sh """
                         echo '${trimmedPro}' > inventories/prod/hosts 
                     """					
-                withCredentials([
-                    usernamePassword(credentialsId: 'nexus_login_credential', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')
-                ]) {            
+                    withCredentials([usernamePassword(credentialsId: 'nexus_login_credential', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {         
                     ansiblePlaybook(
 						credentialsId: 'weblab-staging-ssh-login',
 						disableHostKeyChecking: true,
@@ -122,8 +120,8 @@ pipeline {
                         inventory: 'inventories/staging/hosts',
                         playbook: 'ansible/site.yml',
                         extraVars: [
-                            USER: "${env.NEXUS_USER}",
-                            PASS: "${env.NEXUS_PASS}",
+                            USER: "${NEXUS_USER}",
+                            PASS: "${NEXUS_PASS}",
                             nexusip: "${NEXUS_IP}",
                             reponame: "${NEXUS_REPOSITORY}",
                             artifactname: "${ARTIFACT_NAME}",
