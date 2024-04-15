@@ -128,7 +128,8 @@ pipeline {
 							hyphen: "$HYPHEN",
                             registers_version: "${ARTIFACT_NAME}-${VERSION}-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.${ARTIFACT_EXTENSION}"
                         ],						
-                    )}
+                    )
+                    }
 		        }
 		    }
 		}		
