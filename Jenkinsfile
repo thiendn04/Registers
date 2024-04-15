@@ -113,7 +113,7 @@ pipeline {
                         echo '${trimmedPro}' > inventories/prod/hosts 
                     """					
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'nexus_login_credential', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
-                        
+
                     }                
                     ansiblePlaybook(
 						credentialsId: 'weblab-staging-ssh-login',
@@ -122,8 +122,8 @@ pipeline {
                         inventory: 'inventories/staging/hosts',
                         playbook: 'ansible/site.yml',
                         extraVars: [
-                            //USER: "${NEXUS_USER}",
-                            //PASS: "${NEXUS_PASS}",
+                            USER: "${USERNAME}",
+                            PASS: "${PASSWORD}",
                             nexusip: "${NEXUS_IP}",
                             reponame: "${NEXUS_REPOSITORY}",
                             artifactname: "${ARTIFACT_NAME}",
