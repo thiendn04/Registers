@@ -12,7 +12,8 @@
         url: "http://{{nexusip}}:8081/repository/{{reponame}}/{{artifactname}}/{{hyphen}}/{{registers_version}}"
         dest: "/tmp/registersapp-{{registers_version}}"
         headers: 
-          Authorization: "Basic {{ ((lookup('env', 'USER') + ':' + lookup('env', 'PASS')) | b64encode) }}"
+          #Authorization: "Basic {{ ((lookup('env', 'USER') + ':' + lookup('env', 'PASS')) | b64encode) }}"
+          Authorization: "Basic {{ (USER + ':' + PASS) | b64encode }}"
         force_basic_auth: yes
         validate_certs: yes 
       register: tgzdeploy

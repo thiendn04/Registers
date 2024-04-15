@@ -12,9 +12,9 @@ pipeline {
         NEXUSPORT = "8081"
         NEXUS_IP = "192.168.225.102"
         NEXUS_REPOSITORY = "npm-private"
-        NEXUS_CREDENTIAL_ID = credentials('nexus_login_credential')
         ARTVERSION = "${env.BUILD_ID}"
-        NEXUS_USER = "admin"
+        NEXUS_USER = credentials('nexus_login_credential')
+        NEXUS_PASS = credentials('nexus_login_credential')
         ARTIFACT_NAME = "registers"
 		HYPHEN = "-"
 		VERSION = "1.0.0"
@@ -113,8 +113,6 @@ pipeline {
                     sh """
                         echo '${trimmedPro}' > inventories/prod/hosts 
                     """					
-					echo "Using Nexus User: $NEXUS_USER"
-                    echo "Using Nexus pass: $NEXUS_CREDENTIAL_ID"
                     ansiblePlaybook(
 						credentialsId: 'weblab-staging-ssh-login',
 						disableHostKeyChecking: true,
@@ -122,9 +120,8 @@ pipeline {
                         inventory: 'inventories/staging/hosts',
                         playbook: 'ansible/site.yml',
                         extraVars: [
-                            USER: "${NEXUS_USER}",
-                            //PASS: "${NEXUS_CREDENTIAL_ID}",
-                            PASS: "${env.NEXUS_CREDENTIAL_ID}",
+                            USER: "${env.NEXUS_USER}",
+                            PASS: "${env.NEXUS_PASS}",
                             nexusip: "${NEXUS_IP}",
                             reponame: "${NEXUS_REPOSITORY}",
                             artifactname: "${ARTIFACT_NAME}",
