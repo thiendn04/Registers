@@ -113,7 +113,7 @@ pipeline {
                         echo '${trimmedPro}' > inventories/prod/hosts 
                     """					
                 withCredentials([
-                    usernamePassword(credentialsId: 'nexus-credentials-id', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')
+                    usernamePassword(credentialsId: 'nexus_login_credential', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')
                 ]) {            
                     ansiblePlaybook(
 						credentialsId: 'weblab-staging-ssh-login',
