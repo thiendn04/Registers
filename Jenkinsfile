@@ -112,9 +112,7 @@ pipeline {
                     sh """
                         echo '${trimmedPro}' > inventories/prod/hosts 
                     """					
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'nexus_login_credential', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
-                        sh 'echo uname=$USERNAME pwd=$PASSWORD'                        
-                    }                 
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'nexus_login_credential', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])                
                     ansiblePlaybook(
 						credentialsId: 'weblab-staging-ssh-login',
 						disableHostKeyChecking: true,
