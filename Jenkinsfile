@@ -122,7 +122,7 @@ pipeline {
                         playbook: 'ansible/site.yml',
                         extraVars: [
                             USER: "${NEXUS_USER}",
-                            #PASS: "${NEXUS_CREDENTIAL_ID}",
+                            //PASS: "${NEXUS_CREDENTIAL_ID}",
                             PASS: "${env.NEXUS_CREDENTIAL_ID}",
                             nexusip: "${NEXUS_IP}",
                             reponame: "${NEXUS_REPOSITORY}",
