@@ -111,7 +111,7 @@ pipeline {
                     sh """
                         echo '${trimmedPro}' > inventories/prod/hosts 
                     """
-                    //Lấy username password Nexus repo					
+                    //Lấy username password Nexus từ Jenkins Credential					
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'nexus_login_credential', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS']]){            
                         ansiblePlaybook(
                             credentialsId: 'weblab-staging-ssh-login',
