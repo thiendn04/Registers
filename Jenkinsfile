@@ -113,7 +113,8 @@ pipeline {
                     sh """
                         echo '${trimmedPro}' > inventories/prod/hosts 
                     """					
-					
+					echo "Using Nexus User: $NEXUS_USER"
+                    echo "Using Nexus pass: $NEXUS_CREDENTIAL_ID"
                     ansiblePlaybook(
 						credentialsId: 'weblab-staging-ssh-login',
 						disableHostKeyChecking: true,
