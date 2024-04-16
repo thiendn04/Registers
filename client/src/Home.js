@@ -8,7 +8,7 @@ function Home() {
     const [name, setName] = useState('')
     axios.defaults.withCredentials = true;
     useEffect(() => {
-        axios.get('http://192.168.225.110:8081')
+        axios.get('http://192.168.225.110:8081') //IP Web1, có thể để hostname nếu có dns
         .then( res => {
             if(res.data.Status === "Success") {
                 setAuth(true)
@@ -22,7 +22,7 @@ function Home() {
     }, [])
 
     const handleDelete = () =>{
-        axios.get('http://192.168.225.110:8081/logout')
+        axios.get('http://192.168.225.110:8081/logout') //IP Web1, có thể để hostname nếu có dns
         .then(res => {
             window.location.reload(true);
         })
