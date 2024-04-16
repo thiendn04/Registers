@@ -51,7 +51,7 @@ pipeline {
                     -Dsonar.projectKey=Registers \
                     -Dsonar.sources=. \
                     -Dsonar.css.node=. \
-                    -Dsonar.host.url=http://{{ sonar_ip }}:9000 \
+                    -Dsonar.host.url=http://{{sonar_ip}}:9000 \
                     -Dsonar.login=squ_57a5e4b1bd816a02d7144af6fb478ac8c8324bc7"
                }
             }
