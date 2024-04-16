@@ -8,7 +8,7 @@
       - name: Create MySQL database Test123 and table
         mysql_query:
           login_user: root
-          login_password: {{ mysql_root_password }}
+          login_password: "{{ mysql_root_password }}"
           query: |
             CREATE DATABASE IF NOT EXISTS Test123 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
             USE Test123;
