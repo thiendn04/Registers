@@ -10,7 +10,7 @@ pipeline {
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "192.168.225.102:8081"
         NEXUSPORT = "8081"
-        NEXUS_IP = "192.168.225.102"
+        //NEXUS_IP = "192.168.225.102"
         NEXUS_REPOSITORY = "npm-private"
         ARTVERSION = "${env.BUILD_ID}"
         ARTIFACT_NAME = "registers"
@@ -122,7 +122,7 @@ pipeline {
                             extraVars: [
                                 USER: "${NEXUS_USER}",
                                 PASS: "${NEXUS_PASS}",
-                                nexusip: "${NEXUS_IP}",
+                                nexusip: "{{ nexus_ip }}",
                                 reponame: "${NEXUS_REPOSITORY}",
                                 artifactname: "${ARTIFACT_NAME}",
                                 hyphen: "$HYPHEN",
