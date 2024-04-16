@@ -7,10 +7,9 @@ pipeline {
     agent any
      environment {
         NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "{{ nexus_ip }}:8081"
+        NEXUS_PROTOCOL = "http"    
+        NEXUS_URL = "192.168.225.102:8081"
         NEXUSPORT = "8081"
-        //NEXUS_IP = "192.168.225.102"
         NEXUS_REPOSITORY = "npm-private"
         ARTVERSION = "${env.BUILD_ID}"
         ARTIFACT_NAME = "registers"
@@ -51,7 +50,7 @@ pipeline {
                     -Dsonar.projectKey=Registers \
                     -Dsonar.sources=. \
                     -Dsonar.css.node=. \
-                    -Dsonar.host.url=http://{{sonar_ip}}:9000 \
+                    -Dsonar.host.url=http://192.168.225.101:9000 \
                     -Dsonar.login=squ_57a5e4b1bd816a02d7144af6fb478ac8c8324bc7"
                }
             }
@@ -81,8 +80,8 @@ pipeline {
 					
                     // Tạo tệp tin host và ghi nội dung trong thư mục staging
                     def stag = '''
-                        web01 ansible_host={{ web1_ip }}
-                        db01 ansible_host={{ db1_ip }}
+                        web01 ansible_host=192.168.225.110
+                        db01 ansible_host=192.168.225.111
                         
                         [stagingsrvgrp]
                         web01
@@ -99,7 +98,7 @@ pipeline {
 					
                     // Tạo tệp tin host và ghi nội dung trong thư mục prod
                     def pro = '''
-                        web02 ansible_host={{ web2_ip }}
+                        web02 ansible_host=192.168.225.112
 
                         [appsrvgrp]
                         web02
@@ -122,7 +121,6 @@ pipeline {
                             extraVars: [
                                 USER: "${NEXUS_USER}",
                                 PASS: "${NEXUS_PASS}",
-                                //nexusip: "{{ nexus_ip }}",
                                 reponame: "${NEXUS_REPOSITORY}",
                                 artifactname: "${ARTIFACT_NAME}",
                                 hyphen: "$HYPHEN",
