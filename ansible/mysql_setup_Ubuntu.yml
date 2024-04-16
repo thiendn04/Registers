@@ -67,6 +67,21 @@
         - GRANT ALL PRIVILEGES ON *.* TO 'root'@'{{ web1_ip }}' WITH GRANT OPTION
         - FLUSH PRIVILEGES
 
+      - name: Create MySQL database signup and table
+        mysql_query:
+          login_user: root
+          login_password: "{{ mysql_root_password }}"
+          query: |
+            CREATE DATABASE IF NOT EXISTS signup CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+            USE signup;
+            CREATE TABLE login (
+                id INT(11) NOT NULL AUTO_INCREMENT,
+                name VARCHAR(100) NOT NULL,
+                email VARCHAR(100) NOT NULL,
+                password VARCHAR(120) NOT NULL,
+                PRIMARY KEY (id)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
     - name: Search and edit file mysqld.cnf
       replace:
         path: /etc/mysql/mysql.conf.d/mysqld.cnf
