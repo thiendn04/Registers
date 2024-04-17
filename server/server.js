@@ -15,7 +15,7 @@ const salt = 10;
 
 const app = express();
 app.use(cors({
-    origin: ['http://192.168.225.110'],
+    origin: ['http://192.168.225.110'], //IP Web1, có thể để hostname nếu có dns
     methods: ["POST", "GET"],
     credentials: true
 }));
